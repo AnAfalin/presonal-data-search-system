@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Technical Specification</title>
+    <style>
+        body {
+            padding: 10px;
+            background-color: rgb(245, 246, 250);
+        }
+        h1 {
+            color: #27278a;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .block {
+            border-bottom: 2px solid #0a0a7e;
+        }
+        .thesis {
+            color: #27278a;
+        }
+        li {
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Система поиска персональных данных</h1>
+    <div class="block">
+        <h2>Описание:</h2>
+        <p>Разработать высоконагруженную систему поиска персональных данных. Система должна искать в отправленных на
+            проверку
+            файлах следующие данные:</p>
+        <ul>
+            <li>Номера телефонов</li>
+            <li>Серия и номер паспорта</li>
+            <li>Дата рождения</li>
+            <li>E-mail</li>
+            <li>IP-адреса</li>
+            <li>Номера банковских карт</li>
+        </ul>
+    </div>
+    <div class="block">
+        <h3>Бизнес-процесс:</h3>
+        <p>Клиент отправляет файл на проверку в систему. Содержимое файла преобразуется в удобную форму для обработки и
+            поиска ПД (персональных данных). На выходе клиент получает список найденных ПД или сообщение о том, что файл
+            не
+            содержит ПД.</p>
+        <p>Поддерживаемые форматы файлов:</p>
+        <ul>
+            <li>Текстовые (docx, txt)</li>
+            <li>Табличные (xlsx, csv)</li>
+            <li>Архивы (zip, rar) – по желанию</li>
+            <li>Другие – по желанию</li>
+        </ul>
+    </div>
+    <div class="block">
+        <h3>Архитектура:</h3>
+        <p>Система должна быть спроектирована на основе микросервисной архитектуры.</p>
+    </div>
+    <div>
+        <h3>Микросервисы системы:</h3>
+        <p>Система должна включать как минимум следующие сервисы, которые должны общаться между собой по HTTP (REST) или
+            по
+            Kafka (способ общения выбрать в процессе разработки):</p>
+        <ul>
+            <li><strong class="thesis">UI</strong> – графический интерфейс, позволяющий использовать API (с авторизацией)</li>
+            <li><strong class="thesis">AuthorizationServer</strong> – сервер авторизации</li>
+            <li><strong class="thesis">TaskService</strong> – сервис создания задачи на поиск</li>
+            <li><strong class="thesis">TextProcessor</strong> – сервис обработки текстовых файлов</li>
+            <li><strong class="thesis">TableProcessor</strong> – сервис обработки табличных файлов</li>
+            <li><strong class="thesis">ArchiveProcessor</strong> – сервис обработки архивов (по желанию)</li>
+            <li><strong class="thesis">CheckerService</strong> – сервис поиска КД.</li>
+            <li>В процессе разработки можно добавлять микросервисы по необходимости.</li>
+        </ul>
+    </div>
+    <div class="block">
+        <h3>UI:</h3>
+        <p>UI отвечает только за графический интерфейс (простой frontend). Все запросы, требующие логики, отправляются
+            на
+            backend.</p>
+    </div>
+    <div class="block">
+        <h3>Авторизация:</h3>
+        <p>Авторизация должна выполняться только на UI-сервисе (с помощью AuthorizationServer).</p>
+    </div>
+    <div class="block">
+        <h3>Развертывание:</h3>
+        <p>Система должна быть развернута с помощью Docker-Compose.</p>
+    </div>
+</div>
+</body>
+</html>
